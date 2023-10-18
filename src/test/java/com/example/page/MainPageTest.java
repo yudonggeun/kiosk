@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainPageTest {
 
-    @DisplayName("")
+    @DisplayName("메인 페이지 랜더링")
     @Test
     public void render() {
         //given
