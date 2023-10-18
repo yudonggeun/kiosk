@@ -1,6 +1,7 @@
 package com.example.page;
 
 import com.example.Property;
+import com.example.response.MenuDto;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -9,12 +10,10 @@ import java.util.Map;
 
 public class MainPage implements Page {
 
-    private final Map<String, List<Page>> subPages = new LinkedHashMap<>();
-    private int size = 0;
+    private final Map<String, List<MenuDto>> subMenus = new LinkedHashMap<>();
 
-    public MainPage subPage(String subject, Page... pages) {
-        for (Page page : pages) page.setOrder(++size);
-        subPages.put(subject, Arrays.stream(pages).toList());
+    public MainPage subMenu(String subject, MenuDto... pages) {
+        subMenus.put(subject, Arrays.stream(pages).toList());
         return this;
     }
 
@@ -25,13 +24,15 @@ public class MainPage implements Page {
                 .append(Property.MAIN_GUIDE)
                 .append("\n");
 
-        subPages.forEach((name, menus) -> {
-            sb.append(String.format("[ %s MENU ]\n", name));
-            for (Page page : menus) {
-                sb.append(page.href());
+        int order = 0;
+        for (var entry : subMenus.entrySet()) {
+            var subject = entry.getKey();
+            sb.append(String.format("[ %s MENU ]\n", subject));
+            for (MenuDto menu : entry.getValue()) {
+                sb.append(String.format("%d. %-10s | %s\n", ++order, menu.name(), menu.description()));
             }
             sb.append("\n");
-        });
+        }
 
         return sb.toString();
     }

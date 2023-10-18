@@ -1,10 +1,13 @@
 package com.example.page;
 
-public class ProductsPage implements Page{
+import com.example.Property;
+
+public class ProductsPage implements Page {
 
     private int order;
     private String subject;
     private String description;
+
 
     public ProductsPage(String subject, String description) {
         this.subject = subject;
@@ -13,7 +16,11 @@ public class ProductsPage implements Page{
 
     @Override
     public String render() {
-        var sb = new StringBuilder();
+        var sb = new StringBuilder()
+                .append(Property.PRODUCT_GUIDE)
+                .append("\n")
+                .append(String.format("[ %s MENU ]\n", subject))
+                ;
 
         return sb.toString();
     }
