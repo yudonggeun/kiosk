@@ -1,0 +1,9 @@
+package com.example.state;
+
+public interface State {
+
+//    MAIN,
+//    PRODUCTS, PRODUCT_OPTION, PRODUCT_PROCESS,
+//    COMMAND_ORDER, COMMAND_ORDER_PROCESS,
+//    COMMAND_CANCEL, COMMAND_CANCEL_PROCESS;
+}
