@@ -37,14 +37,5 @@ public class MainPage implements Page {
         return sb.toString();
     }
 
-    @Override
-    public String href() {
-        return "";
-    }
-
-    @Override
-    public void setOrder(int order) {
-
-    }
 
 }

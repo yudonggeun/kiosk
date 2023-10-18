@@ -8,13 +8,5 @@ public class CommandCancelPage implements Page{
         return null;
     }
 
-    @Override
-    public String href() {
-        return null;
-    }
 
-    @Override
-    public void setOrder(int order) {
-
-    }
 }

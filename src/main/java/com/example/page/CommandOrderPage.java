@@ -5,14 +5,4 @@ public class CommandOrderPage implements Page{
     public String render() {
         return null;
     }
-
-    @Override
-    public String href() {
-        return null;
-    }
-
-    @Override
-    public void setOrder(int order) {
-
-    }
 }
