@@ -28,15 +28,15 @@ public class OptionMenu extends Menu {
     @Override
     public Page process(String command, State state) {
         var option = ((OptionMenu) state.getMenu()).option();
-
         var nextMenu = HomeMenu.single();
-        state.setMenu(nextMenu);
 
         if (command.equals("1.확인")) {
             state.addOrder(new Order(option, 1));
+            state.setMenu(nextMenu);
             state.setNeedMain(true);
             return new ProductPurchaseAcceptPage(option.name());
         } else if (command.equals("2.취소")) {
+            state.setMenu(nextMenu);
             return new HomePage(state);
         }
         throw new IllegalArgumentException("잘못된 입력");

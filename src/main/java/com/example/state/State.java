@@ -15,25 +15,20 @@ public class State {
         return state;
     }
     private Menu menu;
-
     private final Cart cart = new Cart();
     private boolean isWait = false;
     private boolean needMain = false;
-
-    public void setMenu(Menu menu){
-        this.menu = menu;
-    }
 
     public Cart getCart() {
         return cart;
     }
 
-    public void addOrder(Order order) {
-        cart.addOrder(order);
-    }
-
     public Menu getMenu() {
         return menu;
+    }
+
+    public void setMenu(Menu menu){
+        this.menu = menu;
     }
 
     public void setWait(boolean isWait) {
@@ -41,12 +36,16 @@ public class State {
         this.isWait = isWait;
     }
 
-    public boolean isWait() {
-        return isWait;
-    }
-
     public void setNeedMain(boolean needMain){
         this.needMain = needMain;
+    }
+
+    public void addOrder(Order order) {
+        cart.addOrder(order);
+    }
+
+    public boolean isWait() {
+        return isWait;
     }
     public boolean needMain() {
         return needMain;

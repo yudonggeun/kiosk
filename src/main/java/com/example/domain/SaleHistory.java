@@ -10,12 +10,10 @@ public class SaleHistory {
 
     private final Map<Product, Integer> history = new HashMap<>();
 
-    public SaleHistory sale(Product product, int count) {
+    public void sale(Product product, int count) {
         history.putIfAbsent(product, 0);
         history.computeIfPresent(product, (p, c) -> c + count);
-        return this;
     }
-
     public List<Product> products() {
         return history.keySet().stream().toList();
     }

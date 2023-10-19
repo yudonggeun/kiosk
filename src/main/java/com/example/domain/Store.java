@@ -4,7 +4,6 @@ import com.example.Client.Client;
 import com.example.domain.menu.*;
 import com.example.domain.menu.factory.CategoryMenuFactory;
 import com.example.domain.menu.factory.ProductMenuFactory;
-import com.example.domain.product.Option;
 import com.example.domain.product.Product;
 import com.example.page.HomePage;
 import com.example.service.Manager;

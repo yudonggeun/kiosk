@@ -5,7 +5,6 @@ import com.example.domain.product.Option;
 import com.example.domain.product.Product;
 import com.example.state.State;
 
-import java.util.List;
 import java.util.Set;
 
 public class ProductOptionPage implements Page {
