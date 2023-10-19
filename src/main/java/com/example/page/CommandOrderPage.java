@@ -16,6 +16,7 @@ public class CommandOrderPage implements Page {
     @Override
     public String render() {
         var sb = new StringBuilder()
+                .append("아래와 같이 주문 하시겠습니까?\n\n")
                 .append("[ Orders ]\n");
 
         Map<Product, Integer> map = cart.listMap();
@@ -26,6 +27,8 @@ public class CommandOrderPage implements Page {
         sb.append("\n")
                 .append("[ Total ]\n")
                 .append(cart.totalPrice() + "원\n")
+                .append("\n")
+                .append("1. 주문      2. 메뉴판\n")
         ;
 
         return sb.toString();

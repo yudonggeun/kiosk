@@ -1,11 +1,11 @@
 package com.example.page;
 
-import com.example.response.ProductResponse;
+import com.example.domain.Product;
 
-public class ProductProcessPage implements Page{
-    private final ProductResponse product;
+public class ProductPurchasePage implements Page{
+    private final Product product;
 
-    public ProductProcessPage(ProductResponse product) {
+    public ProductPurchasePage(Product product) {
         this.product = product;
     }
 

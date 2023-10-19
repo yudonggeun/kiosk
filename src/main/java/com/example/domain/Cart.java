@@ -16,11 +16,14 @@ public class Cart {
         return products;
     }
 
-    public Cart addProduct(Product product , int count) {
-        if (count < 0) throw new IllegalArgumentException("상품 구매는 개수는 0보다 큽니다.");
+    public Cart addOrder(Order order) {
+        var product = order.product();
+        int count = order.count();
+
         products.putIfAbsent(product, 0);
         products.computeIfPresent(product, (p, c) -> c + count);
         totalPrice += product.price() * count;
+
         return this;
     }
 }

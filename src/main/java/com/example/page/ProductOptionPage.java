@@ -1,16 +1,16 @@
 package com.example.page;
 
-import com.example.response.ProductResponse;
+import com.example.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductOptionPage implements Page {
 
-    private final ProductResponse product;
+    private final Product product;
     private final List<OptionDto> options = new ArrayList<>();
 
-    public ProductOptionPage(ProductResponse product) {
+    public ProductOptionPage(Product product) {
         this.product = product;
     }
 

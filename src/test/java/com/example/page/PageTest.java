@@ -1,9 +1,6 @@
 package com.example.page;
 
-import com.example.domain.Cart;
-import com.example.domain.Product;
-import com.example.response.MenuDto;
-import com.example.response.ProductResponse;
+import com.example.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +14,12 @@ public class PageTest {
         //given
         MainPage mainPage = new MainPage()
                 .subMenu("c1",
-                        new MenuDto("hello", "test"),
-                        new MenuDto("hello", "test")
+                        new Menu("hello", "test"),
+                        new Menu("hello", "test")
                 )
                 .subMenu("c2",
-                        new MenuDto("test", "hello"),
-                        new MenuDto("cat", "cat")
+                        new Menu("test", "hello"),
+                        new Menu("cat", "cat")
                 );
         //when
         var page = mainPage.render();
@@ -41,7 +38,7 @@ public class PageTest {
     @Test
     public void renderProductPage() {
         //given
-        var page = new ProductsPage("burgers")
+        var page = new ProductListPage("burgers")
                 .addProduct(
                         new Product("cheese burger", "cheese", 1000),
                         new Product("normal burger", "normal", 2000)
@@ -59,7 +56,7 @@ public class PageTest {
     @Test
     public void renderProductOption() {
         //given
-        var page = new ProductOptionPage(new ProductResponse("cheese burger", "good", 10000))
+        var page = new ProductOptionPage(new Product("cheese burger", "good", 10000))
                 .option("Single", 0)
                 .option("Double", 1000);
         //when
@@ -75,7 +72,7 @@ public class PageTest {
     @Test
     public void renderProductProcess() {
         //given
-        var page = new ProductProcessPage(new ProductResponse("cheese burger(Single)", "good", 10000));
+        var page = new ProductPurchasePage(new Product("cheese burger(Single)", "good", 10000));
         //when
         var render = page.render();
         //then
@@ -85,7 +82,7 @@ public class PageTest {
                                    "1. 확인     2. 취소"));
     }
 
-    @DisplayName("")
+    @DisplayName("주문서 출력 페이지")
     @Test
     public void renderOrder() {
         //given
@@ -93,10 +90,85 @@ public class PageTest {
         var product2 = new Product("샌드위치", "test", 200);
 
         var cart = new Cart()
-                .addProduct(product1, 2)
-                .addProduct(product2, 3);
+                .addOrder(new Order(product1, 2))
+                .addOrder(new Order(product2, 3));
 
         var page = new CommandOrderPage(cart);
+        //when
+        var render = page.render();
+        //then
+        System.out.println(render);
+    }
+
+    @DisplayName("주문 완료 페이지")
+    @Test
+    public void renderOrderComplete() {
+        //given
+        var waitingNumber = 11;
+        var page = new CommandOrderAcceptPage(waitingNumber);
+        //when
+        var render = page.render();
+        //then
+        System.out.println(render);
+    }
+
+    @DisplayName("주문 취소 페이지")
+    @Test
+    public void renderCancelPage() {
+        //given
+        var page = new CommandCancelPage();
+        //when
+        var render = page.render();
+        //then
+        System.out.println(render);
+    }
+
+    @DisplayName("주문 취소 결과 페이지")
+    @Test
+    public void renderCancelAcceptPage() {
+        //given
+        var page = new CommandCancelAcceptPage();
+        //when
+        var render = page.render();
+        //then
+        System.out.println(render);
+    }
+
+    @DisplayName("상품 구매 확정 페이지")
+    @Test
+    public void renderProductPurchaseAccept() {
+        //given
+        var productName = "test";
+        var page = new ProductPurchaseAcceptPage(productName);
+        //when
+        var render = page.render();
+        //then
+        System.out.println(render);
+    }
+
+    @DisplayName("총 판매 금액 페이지")
+    @Test
+    public void renderTotalSales() {
+        //given
+        var totalSales = 10000;
+        var page = new AdminTotalSalesPage(totalSales);
+        //when
+        var render = page.render();
+        //then
+        System.out.println(render);
+    }
+
+    @DisplayName("총 판매상품 목록 현황 페이지")
+    @Test
+    public void renderTotalSalesListPage() {
+        //given
+        var product1 = new Product("햄버거", "test", 1000);
+        var order = new Order(product1, 2);
+
+        var history = new SaleHistory();
+        history.sale(order);
+
+        var page = new AdminSalesListPage(history);
         //when
         var render = page.render();
         //then

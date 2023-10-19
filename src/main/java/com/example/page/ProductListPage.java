@@ -6,17 +6,17 @@ import com.example.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsPage implements Page {
+public class ProductListPage implements Page {
 
     private String subject;
 
     private final List<Product> products = new ArrayList<>();
 
-    public ProductsPage(String subject) {
+    public ProductListPage(String subject) {
         this.subject = subject;
     }
 
-    public ProductsPage addProduct(Product... product){
+    public ProductListPage addProduct(Product... product){
         products.addAll(List.of(product));
         return this;
     }

@@ -15,7 +15,7 @@ public class DomainTest {
         //given
         var product1 = new Product("햄버거", "test", 1000);
         var cart = new Cart();
-        cart.addProduct(product1, 1);
+        cart.addOrder(new Order(product1, 1));
         //when
         Map<Product, Integer> productMap = cart.listMap();
         //then
@@ -29,8 +29,8 @@ public class DomainTest {
         var product1 = new Product("햄버거", "test", 1000);
         var product2 = new Product("샌드위치", "test", 200);
         var cart = new Cart();
-        cart.addProduct(product1, 2);
-        cart.addProduct(product2, 3);
+        cart.addOrder(new Order(product1, 2));
+        cart.addOrder(new Order(product2, 3));
         //when
         int totalPrice = cart.totalPrice();
         //then
