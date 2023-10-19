@@ -18,7 +18,7 @@ public class MainMenu extends Menu {
         menuMap.put(category, Arrays.stream(menus).toList());
         for (Menu menu : menus) {
             orderMap.put(++count, menu);
-            nameMap.put(menu.getName(), menu);
+            nameMap.put(menu.name(), menu);
         }
         return this;
     }

@@ -10,11 +10,11 @@ public class Menu {
         this.name = name;
     }
 
-    public String getDescription() {
+    public String description() {
         return description;
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.page;
 
 import com.example.Property;
-import com.example.response.ProductResponse;
+import com.example.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +10,13 @@ public class ProductsPage implements Page {
 
     private String subject;
 
-    private final List<ProductResponse> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
 
     public ProductsPage(String subject) {
         this.subject = subject;
     }
 
-    public ProductsPage addProduct(ProductResponse... product){
+    public ProductsPage addProduct(Product... product){
         products.addAll(List.of(product));
         return this;
     }

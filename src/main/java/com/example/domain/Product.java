@@ -1,15 +1,23 @@
 package com.example.domain;
 
 public class Product extends Menu {
-    public Product(String description, String name) {
+
+    private int price;
+
+    public Product(String name, String description, int price) {
         super(description, name);
+        this.price = price;
     }
 
-    class Single{
+    public int price() {
+        return price;
+    }
+
+    class Single {
 
     }
 
-    class Double{
+    class Double {
 
     }
 }
