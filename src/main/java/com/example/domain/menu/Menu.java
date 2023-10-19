@@ -1,16 +1,15 @@
 package com.example.domain.menu;
 
-import com.example.service.Handler;
+import com.example.page.Page;
+import com.example.state.State;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Menu {
+public abstract class Menu {
     private final String name;
     private final String description;
     protected final Map<String, Menu> commandMap = new LinkedHashMap<>();
-    protected final Map<String, Handler> handlerMap = new HashMap<>();
 
     public Menu(String name, String description) {
         this.name = name;
@@ -25,27 +24,22 @@ public class Menu {
         return name;
     }
 
-    public Menu find(String command) {
-        if (!commandMap.containsKey(command)) return this;
-        return commandMap.get(command);
-    }
-
     public Menu addMenu(String command, Menu menu) {
         commandMap.put(command, menu);
         return this;
     }
 
-    public Menu addMenu(Menu menu, Handler handler, String command){
-        addMenu(command, menu);
-        handlerMap.put(command, handler);
-        return this;
+    public abstract Page page(State state);
+
+    public Page process(String command, State state) {
+        if (!commandMap.containsKey(command)) throw new IllegalArgumentException();
+        var nextMenu = commandMap.get(command);
+        state.setMenu(nextMenu);
+        return state.page();
     }
 
-    public Menu addMenu(Menu menu, Handler handler, String command, String... commands) {
-        addMenu(menu, handler, command);
-        for (var c : commands) {
-            addMenu(menu, handler, c);
-        }
-        return this;
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

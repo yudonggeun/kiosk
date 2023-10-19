@@ -2,14 +2,17 @@ package com.example.domain.menu;
 
 import com.example.domain.product.Option;
 import com.example.domain.product.Product;
+import com.example.page.Page;
+import com.example.page.ProductOptionPage;
+import com.example.state.State;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class ProductMenu extends Menu {
 
     private final Product product;
-    private final List<Option> options = new ArrayList<>();
+    private final Set<Option> options = new LinkedHashSet<>();
 
     public ProductMenu(Product product) {
         super(product.name(), product.description());
@@ -31,11 +34,16 @@ public class ProductMenu extends Menu {
         return product.name();
     }
 
+    @Override
+    public Page page(State state) {
+        return new ProductOptionPage(state);
+    }
+
     public Product product() {
         return product;
     }
 
-    public List<Option> options() {
+    public Set<Option> options() {
         return options;
     }
 }

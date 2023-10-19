@@ -1,7 +1,6 @@
 package com.example.page;
 
 import com.example.domain.Store;
-import com.example.state.State;
 
 import static java.lang.String.*;
 

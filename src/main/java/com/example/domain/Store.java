@@ -2,6 +2,8 @@ package com.example.domain;
 
 import com.example.Client.Client;
 import com.example.domain.menu.*;
+import com.example.domain.menu.factory.CategoryMenuFactory;
+import com.example.domain.menu.factory.ProductMenuFactory;
 import com.example.domain.product.Option;
 import com.example.domain.product.Product;
 import com.example.page.HomePage;
@@ -26,6 +28,7 @@ public class Store {
     }
 
     public String mainPage(Client client) {
+        client.getState().setMenu(HomeMenu.single());
         return new HomePage(client.getState()).render();
     }
 
@@ -35,53 +38,45 @@ public class Store {
         var burgerA = new Product("burgerA", "burgetA good", 10000);
         var burgerB = new Product("burgerB", "burgetB good", 11000);
 
-        var pizzaA = new Product("burgerA", "burgetA good", 10000);
-        var pizzaB = new Product("burgerB", "burgetB good", 11000);
+        var pizzaA = new Product("pizzaA", "burgetA good", 10000);
+        var pizzaB = new Product("pizzaB", "burgetB good", 11000);
 
-        var singleBurgerA = new Option("single", 0, burgerA);
-        var doubleBurgerB = new Option("Double", 1000, burgerA);
+        // product factory
+        var product1 = ProductMenuFactory.of(burgerA)
+                .option("single", 0, "1", "single")
+                .option("double", 1000, "2", "double");
 
-        // option
-        var pizzaOptionA = new Option("large", 10000, pizzaA);
-        var pizzaOptionB = new Option("medium", 0, pizzaB);
+        var product2 = ProductMenuFactory.of(burgerB)
+                .option("single", 0, "1", "single")
+                .option("double", 1000, "2", "double");
 
-        // option menu
-        var singleBurgerAOptionMenu = new OptionMenu(singleBurgerA);
-        var doubleBurgerAOptionMenu = new OptionMenu(doubleBurgerB);
+        var product3 = ProductMenuFactory.of(pizzaA)
+                .option("large", 10000, "1")
+                .option("medium", 0, "2");
 
-        var pizzaOptMenu = new OptionMenu(pizzaOptionA);
-        var pizzaOptMenu2 = new OptionMenu(pizzaOptionB);
-
-        // product menu
-        var burgerAMenu = new ProductMenu(burgerA)
-                .addOption("1", singleBurgerAOptionMenu)
-                .addOption("2", doubleBurgerAOptionMenu);
-
-        var burgerBMenu = new ProductMenu(burgerB)
-                .addOption("1", singleBurgerAOptionMenu)
-                .addOption("2", doubleBurgerAOptionMenu);
-
-        var pizzaAMenu = new ProductMenu(pizzaA)
-                .addOption("1", pizzaOptMenu)
-                .addOption("2", pizzaOptMenu2);
+        var product4 = ProductMenuFactory.of(pizzaB)
+                .option("large", 10000, "1")
+                .option("medium", 0, "2");
 
         // category menu
         var subMenu1 = new CategoryMenu("burger", "test")
-                .addMenu("1", burgerAMenu)
-                .addMenu("2", burgerBMenu);
+                .addProductMenu(product1, "1", "burgerA")
+                .addProductMenu(product2, "2", "burgerB");
 
         var subMenu2 = new CategoryMenu("pizza", "test")
-                .addMenu("1", pizzaAMenu);
+                .addProductMenu(product3, "1")
+                .addProductMenu(product4, "2");
 
         // order menu
-        var orderMenu = new CommandOrderMenu("order", "장바구니 주문");
-        var cancelMenu = new CommandCancelMenu("cancel", "취소");
-
         main = HomeMenu.single()
-                .addMenu("category1", "1", subMenu1)
-                .addMenu("category1", "2", subMenu2)
-                .addMenu("order", "3", orderMenu)
-                .addMenu("order", "4", cancelMenu)
+                .addMenu(CategoryMenuFactory.of("category1")
+                        .addCategory(subMenu1, "1", "burger", "1.burger")
+                        .addCategory(subMenu2, "2", "pizza", "2.pizza")
+                )
+                .addMenu(CategoryMenuFactory.of("order")
+                        .addCategory(new CommandOrderMenu("order", "장바구니 주문"), "3", "장바구니 주문")
+                        .addCategory(new CommandCancelMenu("cancel", "취소"), "4", "취소")
+                )
         ;
     }
 }

@@ -4,6 +4,8 @@ import com.example.domain.Cart;
 import com.example.domain.Order;
 import com.example.domain.Store;
 import com.example.domain.menu.Menu;
+import com.example.page.Page;
+import com.example.service.OrderService;
 
 public class State {
 
@@ -35,6 +37,7 @@ public class State {
     }
 
     public void setWait(boolean isWait) {
+        if(!isWait) OrderService.quit();
         this.isWait = isWait;
     }
 
@@ -47,5 +50,9 @@ public class State {
     }
     public boolean needMain() {
         return needMain;
+    }
+
+    public Page page() {
+        return menu.page(this);
     }
 }

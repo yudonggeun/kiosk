@@ -1,14 +1,5 @@
 package com.example.page;
 
-import com.example.domain.*;
-import com.example.domain.menu.*;
-import com.example.domain.product.Option;
-import com.example.domain.product.Product;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 public class PageTest {
 
 //    @DisplayName("메인 페이지 랜더링")
