@@ -1,6 +1,6 @@
 package com.example.domain.menu;
 
-import com.example.domain.menu.factory.ProductMenuFactory;
+import com.example.domain.factory.ProductMenuFactory;
 import com.example.page.Page;
 import com.example.page.ProductListPage;
 import com.example.state.State;

@@ -1,4 +1,4 @@
-package com.example.domain.product;
+package com.example.domain;
 
 public class Option extends Product{
 

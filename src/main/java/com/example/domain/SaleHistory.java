@@ -1,7 +1,5 @@
 package com.example.domain;
 
-import com.example.domain.product.Product;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,8 @@
 package com.example.domain.menu;
 
+import com.example.domain.HomeMenu;
 import com.example.domain.Order;
-import com.example.domain.product.Option;
+import com.example.domain.Option;
 import com.example.page.HomePage;
 import com.example.page.Page;
 import com.example.page.ProductPurchaseAcceptPage;

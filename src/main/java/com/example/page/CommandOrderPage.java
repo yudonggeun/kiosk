@@ -1,7 +1,7 @@
 package com.example.page;
 
 import com.example.domain.Cart;
-import com.example.domain.product.Product;
+import com.example.domain.Product;
 import com.example.state.State;
 
 import java.util.Map;

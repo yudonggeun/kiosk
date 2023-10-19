@@ -15,7 +15,6 @@ public abstract class Menu {
         this.name = name;
         this.description = description;
     }
-
     public String description() {
         return description;
     }

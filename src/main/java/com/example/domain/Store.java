@@ -2,9 +2,8 @@ package com.example.domain;
 
 import com.example.Client.Client;
 import com.example.domain.menu.*;
-import com.example.domain.menu.factory.CategoryMenuFactory;
-import com.example.domain.menu.factory.ProductMenuFactory;
-import com.example.domain.product.Product;
+import com.example.domain.factory.CategoryMenuFactory;
+import com.example.domain.factory.ProductMenuFactory;
 import com.example.page.HomePage;
 import com.example.service.Manager;
 import com.example.state.State;

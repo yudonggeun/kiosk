@@ -1,4 +1,4 @@
-package com.example.domain.menu.factory;
+package com.example.domain.factory;
 
 import com.example.domain.menu.Menu;
 

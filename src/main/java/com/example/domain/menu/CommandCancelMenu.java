@@ -1,5 +1,6 @@
 package com.example.domain.menu;
 
+import com.example.domain.HomeMenu;
 import com.example.page.CommandCancelAcceptPage;
 import com.example.page.CommandCancelPage;
 import com.example.page.HomePage;

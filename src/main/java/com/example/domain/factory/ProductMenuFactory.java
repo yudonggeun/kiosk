@@ -1,9 +1,9 @@
-package com.example.domain.menu.factory;
+package com.example.domain.factory;
 
 import com.example.domain.menu.OptionMenu;
 import com.example.domain.menu.ProductMenu;
-import com.example.domain.product.Option;
-import com.example.domain.product.Product;
+import com.example.domain.Option;
+import com.example.domain.Product;
 
 public class ProductMenuFactory {
 

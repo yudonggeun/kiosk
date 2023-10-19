@@ -1,7 +1,7 @@
 package com.example.domain.menu;
 
-import com.example.domain.product.Option;
-import com.example.domain.product.Product;
+import com.example.domain.Option;
+import com.example.domain.Product;
 import com.example.page.Page;
 import com.example.page.ProductOptionPage;
 import com.example.state.State;
@@ -34,16 +34,16 @@ public class ProductMenu extends Menu {
         return product.name();
     }
 
-    @Override
-    public Page page(State state) {
-        return new ProductOptionPage(state);
-    }
-
-    public Product product() {
+    public Product getProduct() {
         return product;
     }
 
-    public Set<Option> options() {
+    public Set<Option> getOptions() {
         return options;
+    }
+
+    @Override
+    public Page page(State state) {
+        return new ProductOptionPage(state);
     }
 }

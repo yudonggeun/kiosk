@@ -1,8 +1,8 @@
 package com.example.page;
 
 import com.example.domain.menu.ProductMenu;
-import com.example.domain.product.Option;
-import com.example.domain.product.Product;
+import com.example.domain.Option;
+import com.example.domain.Product;
 import com.example.state.State;
 
 import java.util.Set;
@@ -14,8 +14,8 @@ public class ProductOptionPage implements Page {
 
     public ProductOptionPage(State state) {
         var menu = (ProductMenu) state.getMenu();
-        this.product = menu.product();
-        this.options = menu.options();
+        this.product = menu.getProduct();
+        this.options = menu.getOptions();
     }
 
     @Override

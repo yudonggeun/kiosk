@@ -1,5 +1,6 @@
 package com.example.domain.menu;
 
+import com.example.domain.HomeMenu;
 import com.example.domain.Store;
 import com.example.page.CommandOrderAcceptPage;
 import com.example.page.CommandOrderPage;

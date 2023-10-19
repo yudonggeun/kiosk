@@ -5,8 +5,9 @@ import com.example.state.State;
 
 public class BackMenu extends Menu {
     private final Menu preMenu;
+
     public BackMenu(Menu perMenu) {
-        super("","");
+        super("", "");
         this.preMenu = perMenu;
     }
 
@@ -17,9 +18,9 @@ public class BackMenu extends Menu {
 
     @Override
     public Page process(String command, State state) {
-        if(command.equals("1.돌아가기")){
+        if (command.equals("1.돌아가기")) {
             state.setMenu(preMenu);
-            return  state.page();
+            return state.page();
         }
         throw new IllegalArgumentException("잘못된 입력");
     }

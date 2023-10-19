@@ -1,7 +1,7 @@
 package com.example.page;
 
 import com.example.config.Property;
-import com.example.domain.menu.HomeMenu;
+import com.example.domain.HomeMenu;
 import com.example.state.State;
 
 public class HomePage implements Page {
