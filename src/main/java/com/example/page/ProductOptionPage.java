@@ -1,6 +1,9 @@
 package com.example.page;
 
-import com.example.domain.Product;
+import com.example.domain.menu.OptionMenu;
+import com.example.domain.menu.ProductMenu;
+import com.example.domain.product.Option;
+import com.example.domain.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +11,11 @@ import java.util.List;
 public class ProductOptionPage implements Page {
 
     private final Product product;
-    private final List<OptionDto> options = new ArrayList<>();
+    private List<Option> options;
 
-    public ProductOptionPage(Product product) {
-        this.product = product;
-    }
-
-    public ProductOptionPage option(String name, int additionalFee){
-        options.add(new OptionDto(name, additionalFee));
-        return this;
+    public ProductOptionPage(ProductMenu menu) {
+        this.product = menu.product();
+        this.options = menu.options();
     }
 
     @Override
@@ -27,23 +26,11 @@ public class ProductOptionPage implements Page {
                 ;
 
         int order = 0;
-        for (OptionDto option : options) {
-            sb.append(String.format("%d. %s(%d원)     ", ++order, option.name, product.price() + option.additionalFee));
+        for (var option : options) {
+            sb.append(String.format("%d. %s(%d원)     ", ++order, option.optionName(), option.price()));
         }
         sb.append("\n");
 
         return sb.toString();
     }
-
-    class OptionDto{
-        private String name;
-
-        private int additionalFee;
-
-        public OptionDto(String name, int additionalFee) {
-            this.name = name;
-            this.additionalFee = additionalFee;
-        }
-    }
-
 }

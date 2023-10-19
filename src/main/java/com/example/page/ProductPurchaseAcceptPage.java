@@ -11,7 +11,7 @@ public class ProductPurchaseAcceptPage implements Page {
     @Override
     public String render() {
         var sb = new StringBuilder()
-                .append(productName + " 가 장바구니에 추가되었습니다.");
+                .append(productName + " 가 장바구니에 추가되었습니다.\n");
         return sb.toString();
     }
 }

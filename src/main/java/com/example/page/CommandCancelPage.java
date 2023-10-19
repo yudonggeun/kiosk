@@ -6,7 +6,7 @@ public class CommandCancelPage implements Page {
     public String render() {
         var sb = new StringBuilder()
                 .append("진행하던 주문을 취소하시겠습니까?\n")
-                .append("1. 확인     2. 주문\n\n");
+                .append("1. 확인     2. 취소\n");
         return sb.toString();
     }
 }

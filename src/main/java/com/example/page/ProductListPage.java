@@ -1,24 +1,16 @@
 package com.example.page;
 
 import com.example.Property;
-import com.example.domain.Product;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.domain.menu.CategoryMenu;
+import com.example.domain.menu.ProductMenu;
 
 public class ProductListPage implements Page {
 
-    private String subject;
+    private CategoryMenu menu;
 
-    private final List<Product> products = new ArrayList<>();
 
-    public ProductListPage(String subject) {
-        this.subject = subject;
-    }
-
-    public ProductListPage addProduct(Product... product){
-        products.addAll(List.of(product));
-        return this;
+    public ProductListPage(CategoryMenu menu) {
+        this.menu = menu;
     }
 
     @Override
@@ -27,11 +19,11 @@ public class ProductListPage implements Page {
                 .append(Property.WELCOME)
                 .append(Property.PRODUCT_GUIDE)
                 .append("\n")
-                .append(String.format("[ %s MENU ]\n", subject));
+                .append(String.format("[ %s MENU ]\n", menu.name()));
 
         int order = 0;
-        for (var product : products) {
-            sb.append(String.format("%d. %-10s | %10d원 | %s\n", ++order, product.name(), product.price(), product.description()));
+        for (var product : menu.products()) {
+            sb.append(String.format("%d. %-10s | %10d원 | %s\n", ++order, product.name(),((ProductMenu) product).price(), product.description()));
         }
         sb.append("\n");
         return sb.toString();

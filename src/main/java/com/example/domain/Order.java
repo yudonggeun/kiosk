@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import com.example.domain.product.Product;
+
 public class Order {
     private final Product product;
     private int count;

@@ -1,6 +1,9 @@
 package com.example.page;
 
 import com.example.domain.*;
+import com.example.domain.menu.*;
+import com.example.domain.product.Option;
+import com.example.domain.product.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,15 +15,16 @@ public class PageTest {
     @Test
     public void render() {
         //given
-        MainPage mainPage = new MainPage()
-                .subMenu("c1",
-                        new Menu("hello", "test"),
-                        new Menu("hello", "test")
+        var mainMenu = MainMenu.single
+                .addMenu("c1",
+                        new CategoryMenu("test", "hello"),
+                        new CategoryMenu("test", "hello")
                 )
-                .subMenu("c2",
-                        new Menu("test", "hello"),
-                        new Menu("cat", "cat")
+                .addMenu("c2",
+                        new CategoryMenu("hello", "test"),
+                        new CategoryMenu("cat", "cat")
                 );
+        MainPage mainPage = new MainPage(mainMenu);
         //when
         var page = mainPage.render();
         //then
@@ -38,11 +42,12 @@ public class PageTest {
     @Test
     public void renderProductPage() {
         //given
-        var page = new ProductListPage("burgers")
-                .addProduct(
-                        new Product("cheese burger", "cheese", 1000),
-                        new Product("normal burger", "normal", 2000)
+        var category = new CategoryMenu("burgers", "설명")
+                .addMenu(
+                        new ProductMenu(new Product("cheese burger", "cheese", 1000), "1"),
+                        new ProductMenu( new Product("normal burger", "normal", 2000), "2" )
                 );
+        var page = new ProductListPage(category);
         //when
         var render = page.render();
         //then
@@ -56,9 +61,13 @@ public class PageTest {
     @Test
     public void renderProductOption() {
         //given
-        var page = new ProductOptionPage(new Product("cheese burger", "good", 10000))
-                .option("Single", 0)
-                .option("Double", 1000);
+        var product = new Product("cheese burger", "good", 10000);
+        var productMenu = new ProductMenu(product)
+                .addOption(
+                        new OptionMenu(new Option("Single", 0, product)),
+                        new OptionMenu(new Option("Double", 1000, product))
+                );
+        var page = new ProductOptionPage(productMenu);
         //when
         var render = page.render();
         //then
@@ -72,12 +81,15 @@ public class PageTest {
     @Test
     public void renderProductProcess() {
         //given
-        var page = new ProductPurchasePage(new Product("cheese burger(Single)", "good", 10000));
+        var product = new Product("cheese burger", "good", 9000);
+        var option = new Option("Double", 1000, product);
+
+        var page = new ProductPurchasePage(option);
         //when
         var render = page.render();
         //then
         System.out.println(render);
-        assertTrue(render.contains("\"cheese burger(Single) |      10000원 | good\"\n" +
+        assertTrue(render.contains("\"cheese burger(Double) |      10000원 | good\"\n" +
                                    "위 메뉴를 장바구니에 추가하시겠습니까?\n" +
                                    "1. 확인     2. 취소"));
     }
@@ -166,7 +178,7 @@ public class PageTest {
         var order = new Order(product1, 2);
 
         var history = new SaleHistory();
-        history.sale(order);
+        history.sale(order.product(), order.count());
 
         var page = new AdminSalesListPage(history);
         //when

@@ -1,20 +1,13 @@
 package com.example.page;
 
 import com.example.Property;
-import com.example.domain.Menu;
-
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import com.example.domain.menu.MainMenu;
 
 public class MainPage implements Page {
+    private final MainMenu mainMenu;
 
-    private final Map<String, List<Menu>> subMenus = new LinkedHashMap<>();
-
-    public MainPage subMenu(String subject, Menu... pages) {
-        subMenus.put(subject, Arrays.stream(pages).toList());
-        return this;
+    public MainPage(MainMenu mainMenu) {
+        this.mainMenu = mainMenu;
     }
 
     @Override
@@ -25,6 +18,8 @@ public class MainPage implements Page {
                 .append("\n");
 
         int order = 0;
+
+        var subMenus = mainMenu.pageMap();
         for (var entry : subMenus.entrySet()) {
             var subject = entry.getKey();
             sb.append(String.format("[ %s MENU ]\n", subject));
@@ -36,6 +31,4 @@ public class MainPage implements Page {
 
         return sb.toString();
     }
-
-
 }

@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import com.example.domain.product.Product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DomainTest {
+public class CartTest {
 
     @DisplayName("장바구니에 상품을 넣는다.")
     @Test

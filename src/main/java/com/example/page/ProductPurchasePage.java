@@ -1,6 +1,6 @@
 package com.example.page;
 
-import com.example.domain.Product;
+import com.example.domain.product.Product;
 
 public class ProductPurchasePage implements Page{
     private final Product product;

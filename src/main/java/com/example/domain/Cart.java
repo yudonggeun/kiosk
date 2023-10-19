@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import com.example.domain.product.Product;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,5 +27,14 @@ public class Cart {
         totalPrice += product.price() * count;
 
         return this;
+    }
+
+    public Map<Product, Integer> getOrders() {
+        return products;
+    }
+
+    public void clear() {
+        totalPrice = 0;
+        products.clear();
     }
 }
