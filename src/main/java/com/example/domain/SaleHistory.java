@@ -19,4 +19,14 @@ public class SaleHistory {
     public List<Product> products() {
         return history.keySet().stream().toList();
     }
+
+    public int totalSalePrice(){
+        int totalSalePrice = 0;
+        for (var entry : history.entrySet()) {
+            var product = entry.getKey();
+            var count = entry.getValue();
+            totalSalePrice += product.price() * count;
+        }
+        return totalSalePrice;
+    }
 }

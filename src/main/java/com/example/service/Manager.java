@@ -87,10 +87,34 @@ public class Manager {
                 throw new IllegalArgumentException("잘못된 입력");
             }
         });
+
+        mapping.put(BackMenu.class, (menu, command, state) -> {
+           if (command.equals("1.돌아가기")){
+               state.setMenu(MainMenu.single());
+               return new MainPage(Store.main);
+           }
+            throw new IllegalArgumentException("잘못된 입력");
+        });
     }
 
     public Page handle(Menu menu, String command, State state) {
+        if(command.equals("0")){
+            return getTotalSalePrice(menu, state);
+        } else if(command.equals("=")){
+            return getTotalSaleList(menu, state);
+        }
+
         return mapping.get(menu.getClass())
                 .handle(menu, command, state);
+    }
+
+    public Page getTotalSalePrice(Menu menu, State state) {
+        state.setMenu(new BackMenu(menu));
+        return new AdminTotalSalesPage(Store.record.totalSalePrice());
+    }
+
+    public Page getTotalSaleList(Menu menu, State state) {
+        state.setMenu(new BackMenu(menu));
+        return new AdminSalesListPage(Store.record);
     }
 }
