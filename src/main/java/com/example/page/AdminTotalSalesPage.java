@@ -1,19 +1,22 @@
 package com.example.page;
 
+import com.example.domain.Store;
+import com.example.state.State;
+
+import static java.lang.String.*;
+
 public class AdminTotalSalesPage implements Page {
 
     private final int totalSales;
 
-    public AdminTotalSalesPage(int totalSales) {
-        this.totalSales = totalSales;
+    public AdminTotalSalesPage() {
+        this.totalSales = Store.record.totalSalePrice();
     }
 
     @Override
     public String render() {
-        var sb = new StringBuilder()
-                .append("[ 총 판매금액 현황 ]\n")
-                .append(String.format("현재까지 총 판매된 금액은 [ %d원 ]입니다.\n", totalSales))
-                .append("1. 돌아가기\n");
-        return sb.toString();
+        return "[ 총 판매금액 현황 ]\n" +
+               format("현재까지 총 판매된 금액은 [ %d원 ]입니다.\n", totalSales) +
+               "1. 돌아가기\n";
     }
 }

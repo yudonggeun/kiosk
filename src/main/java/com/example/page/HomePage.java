@@ -1,13 +1,14 @@
 package com.example.page;
 
-import com.example.Property;
-import com.example.domain.menu.MainMenu;
+import com.example.config.Property;
+import com.example.domain.menu.HomeMenu;
+import com.example.state.State;
 
-public class MainPage implements Page {
-    private final MainMenu mainMenu;
+public class HomePage implements Page {
+    private final HomeMenu mainMenu;
 
-    public MainPage(MainMenu mainMenu) {
-        this.mainMenu = mainMenu;
+    public HomePage(State state) {
+        this.mainMenu = (HomeMenu) state.getMenu();
     }
 
     @Override

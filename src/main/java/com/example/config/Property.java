@@ -1,4 +1,4 @@
-package com.example;
+package com.example.config;
 
 public class Property {
     public final static String WELCOME = "\"구멍가게 에 오신걸 환경합니다.\"\n";

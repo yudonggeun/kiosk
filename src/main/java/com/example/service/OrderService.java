@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class OrderService {
 
-    public static AtomicInteger waitingNumber = new AtomicInteger(0);
+    public static final AtomicInteger waitingNumber = new AtomicInteger(0);
 
     public static int waiting(){
         return waitingNumber.getAndIncrement();

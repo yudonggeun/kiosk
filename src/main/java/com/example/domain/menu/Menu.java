@@ -1,14 +1,20 @@
 package com.example.domain.menu;
 
-public class Menu {
-    private String description;
-    private String name;
-    private String[] command;
+import com.example.service.Handler;
 
-    public Menu(String description, String name, String... commands) {
-        this.description = description;
-        this.command = commands;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class Menu {
+    private final String name;
+    private final String description;
+    protected final Map<String, Menu> commandMap = new LinkedHashMap<>();
+    protected final Map<String, Handler> handlerMap = new HashMap<>();
+
+    public Menu(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
     public String description() {
@@ -19,16 +25,27 @@ public class Menu {
         return name;
     }
 
-    public Menu setCommand(String... command) {
-        this.command = command;
+    public Menu find(String command) {
+        if (!commandMap.containsKey(command)) return this;
+        return commandMap.get(command);
+    }
+
+    public Menu addMenu(String command, Menu menu) {
+        commandMap.put(command, menu);
         return this;
     }
 
-    protected String[] commands() {
-        return command;
+    public Menu addMenu(Menu menu, Handler handler, String command){
+        addMenu(command, menu);
+        handlerMap.put(command, handler);
+        return this;
     }
 
-    public Menu find(String command) {
-        return null;
+    public Menu addMenu(Menu menu, Handler handler, String command, String... commands) {
+        addMenu(menu, handler, command);
+        for (var c : commands) {
+            addMenu(menu, handler, c);
+        }
+        return this;
     }
 }

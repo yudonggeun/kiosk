@@ -6,21 +6,19 @@ import com.example.domain.product.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductMenu extends ParentMenu<OptionMenu>{
+public class ProductMenu extends Menu {
 
     private final Product product;
     private final List<Option> options = new ArrayList<>();
 
-    public ProductMenu(Product product, String... commands) {
-        super(product.name(), product.description(), commands);
+    public ProductMenu(Product product) {
+        super(product.name(), product.description());
         this.product = product;
     }
 
-    public ProductMenu addOption(OptionMenu... options) {
-        for (var menu : options) {
-            this.options.add(menu.option());
-            addMenu(menu);
-        }
+    public ProductMenu addOption(String command, OptionMenu menu) {
+        this.options.add(menu.option());
+        addMenu(command, menu);
         return this;
     }
 
@@ -37,7 +35,7 @@ public class ProductMenu extends ParentMenu<OptionMenu>{
         return product;
     }
 
-    public List<Option> options(){
+    public List<Option> options() {
         return options;
     }
 }

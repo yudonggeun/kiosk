@@ -7,11 +7,6 @@ import com.example.domain.menu.Menu;
 
 public class State {
 
-//    MAIN,
-//    PRODUCTS, PRODUCT_OPTION, PRODUCT_PROCESS,
-//    COMMAND_ORDER, COMMAND_ORDER_PROCESS,
-//    COMMAND_CANCEL, COMMAND_CANCEL_PROCESS;
-
     public static State create() {
         State state = new State();
         state.setMenu(Store.main);
@@ -25,10 +20,6 @@ public class State {
 
     public void setMenu(Menu menu){
         this.menu = menu;
-    }
-
-    public String page() {
-        return null;
     }
 
     public Cart getCart() {

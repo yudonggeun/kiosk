@@ -12,109 +12,107 @@ import java.util.Map;
 
 public class Manager {
 
-    private Map<Object, Handler> mapping = new HashMap<>();
+    private final Map<Object, Handler> mapping = new HashMap<>();
 
     public Manager() {
-        mapping.put(MainMenu.class, (menu, command, state) -> {
-            Page result = new MainPage((MainMenu) menu);
+        mapping.put(HomeMenu.class, (command, state) -> {
+            Page result = new HomePage(state);
 
-            var subMenu = menu.find(command);
+            var subMenu = state.getMenu().find(command);
             state.setMenu(subMenu);
 
-            if (subMenu instanceof CategoryMenu) result = new ProductListPage((CategoryMenu) subMenu);
-            else if (subMenu instanceof CommandOrderMenu) result = new CommandOrderPage(state.getCart());
+            if (subMenu instanceof CategoryMenu) result = new ProductListPage(state);
+            else if (subMenu instanceof CommandOrderMenu) result = new CommandOrderPage(state);
             else if (subMenu instanceof CommandCancelMenu) result = new CommandCancelPage();
 
             return result;
         });
 
-        mapping.put(CategoryMenu.class, (categoryMenu, command, state) -> {
-            var productMenu = (ProductMenu) categoryMenu.find(command);
+        mapping.put(CategoryMenu.class, (command, state) -> {
+            var productMenu = (ProductMenu) state.getMenu().find(command);
             state.setMenu(productMenu);
-            return new ProductOptionPage(productMenu);
+            return new ProductOptionPage(state);
         });
 
-        mapping.put(ProductMenu.class, (menu, command, state) -> {
-            var optionMenu = (OptionMenu) menu.find(command);
+        mapping.put(ProductMenu.class, (command, state) -> {
+            var optionMenu = (OptionMenu) state.getMenu().find(command);
             state.setMenu(optionMenu);
-            var option = optionMenu.option();
-            return new ProductPurchasePage(option);
+            return new ProductPurchasePage(state);
         });
 
-        mapping.put(OptionMenu.class, (menu, command, state) -> {
+        mapping.put(OptionMenu.class, (command, state) -> {
             if (command.equals("1.확인")) {
-                var option = ((OptionMenu) menu).option();
+                var option = ((OptionMenu) state.getMenu()).option();
                 state.addOrder(new Order(option, 1));
-                state.setMenu(MainMenu.single());
                 state.setNeedMain(true);
+                state.setMenu(HomeMenu.single());
                 return new ProductPurchaseAcceptPage(option.name());
             } else if (command.equals("2.취소")) {
-                state.setMenu(MainMenu.single());
             } else {
                 throw new IllegalArgumentException("잘못된 입력");
             }
-            return new MainPage(Store.main);
+            state.setMenu(HomeMenu.single());
+            return new HomePage(state);
         });
 
-        mapping.put(CommandOrderMenu.class, (menu, command, state) -> {
+        mapping.put(CommandOrderMenu.class, (command, state) -> {
             if (command.equals("1.주문")) {
                 Cart cart = state.getCart();
-                cart.getOrders().forEach((product, count) -> {
-                    Store.record.sale(product, count);
-                });
+                cart.getOrders().forEach(Store.record::sale);
                 cart.clear();
                 state.setWait(true);
-                state.setMenu(MainMenu.single());
-                return new CommandOrderAcceptPage(OrderService.waiting());
+                state.setMenu(HomeMenu.single());
+                return new CommandOrderAcceptPage();
             } else if (command.equals("2.메뉴판")) {
-                state.setMenu(MainMenu.single());
-                return new MainPage(Store.main);
+                state.setMenu(HomeMenu.single());
+                return new HomePage(state);
             } else {
                 throw new IllegalArgumentException("잘못된 입력");
             }
         });
 
-        mapping.put(CommandCancelMenu.class, (menu, command, state) -> {
+        mapping.put(CommandCancelMenu.class, (command, state) -> {
             if (command.equals("1.확인")) {
                 state.getCart().clear();
-                state.setMenu(MainMenu.single());
+                state.setMenu(HomeMenu.single());
                 state.setNeedMain(true);
                 return new CommandCancelAcceptPage();
             } else if (command.equals("2.취소")) {
-                state.setMenu(MainMenu.single());
-                return new MainPage(Store.main);
+                state.setMenu(HomeMenu.single());
+                return new HomePage(state);
             } else {
                 throw new IllegalArgumentException("잘못된 입력");
             }
         });
 
-        mapping.put(BackMenu.class, (menu, command, state) -> {
-           if (command.equals("1.돌아가기")){
-               state.setMenu(MainMenu.single());
-               return new MainPage(Store.main);
-           }
+        mapping.put(BackMenu.class, (command, state) -> {
+            if (command.equals("1.돌아가기")) {
+                state.setMenu(HomeMenu.single());
+                return new HomePage(state);
+            }
             throw new IllegalArgumentException("잘못된 입력");
         });
     }
 
-    public Page handle(Menu menu, String command, State state) {
-        if(command.equals("0")){
-            return getTotalSalePrice(menu, state);
-        } else if(command.equals("=")){
-            return getTotalSaleList(menu, state);
+    public Page handle(String command, State state) {
+        var menu = state.getMenu();
+        if (command.equals("0")) {
+            return getTotalSalePrice(state);
+        } else if (command.equals("=")) {
+            return getTotalSaleList(state);
         }
 
         return mapping.get(menu.getClass())
-                .handle(menu, command, state);
+                .handle(command, state);
     }
 
-    public Page getTotalSalePrice(Menu menu, State state) {
-        state.setMenu(new BackMenu(menu));
-        return new AdminTotalSalesPage(Store.record.totalSalePrice());
+    public Page getTotalSalePrice(State state) {
+        state.setMenu(new BackMenu(state.getMenu()));
+        return new AdminTotalSalesPage();
     }
 
-    public Page getTotalSaleList(Menu menu, State state) {
-        state.setMenu(new BackMenu(menu));
-        return new AdminSalesListPage(Store.record);
+    public Page getTotalSaleList(State state) {
+        state.setMenu(new BackMenu(state.getMenu()));
+        return new AdminSalesListPage();
     }
 }

@@ -1,19 +1,19 @@
 package com.example.page;
 
-import com.example.domain.menu.OptionMenu;
 import com.example.domain.menu.ProductMenu;
 import com.example.domain.product.Option;
 import com.example.domain.product.Product;
+import com.example.state.State;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductOptionPage implements Page {
 
     private final Product product;
-    private List<Option> options;
+    private final List<Option> options;
 
-    public ProductOptionPage(ProductMenu menu) {
+    public ProductOptionPage(State state) {
+        var menu = (ProductMenu) state.getMenu();
         this.product = menu.product();
         this.options = menu.options();
     }

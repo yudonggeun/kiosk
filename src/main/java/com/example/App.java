@@ -6,6 +6,8 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws IOException, InterruptedException {
-        new CliClient().run();
+        try(var client = new CliClient()){
+            client.run();
+        }
     }
 }

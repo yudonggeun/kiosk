@@ -1,16 +1,17 @@
 package com.example.page;
 
-import com.example.Property;
+import com.example.config.Property;
 import com.example.domain.menu.CategoryMenu;
 import com.example.domain.menu.ProductMenu;
+import com.example.state.State;
 
 public class ProductListPage implements Page {
 
-    private CategoryMenu menu;
+    private final CategoryMenu menu;
 
 
-    public ProductListPage(CategoryMenu menu) {
-        this.menu = menu;
+    public ProductListPage(State state) {
+        this.menu = (CategoryMenu) state.getMenu();
     }
 
     @Override
