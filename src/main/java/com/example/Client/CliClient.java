@@ -1,6 +1,7 @@
 package com.example.Client;
 
 import com.example.domain.Store;
+import com.example.domain.menu.template.Menu;
 import com.example.state.State;
 
 import java.io.BufferedReader;
@@ -11,38 +12,42 @@ import java.io.InputStreamReader;
 public class CliClient implements Closeable, Client{
 
     private final BufferedReader br;
-    private State state;
+    private final State state;
+    private final Store store;
 
     public CliClient() {
         br = new BufferedReader(new InputStreamReader(System.in));
+        store = new Store();
+        state = State.create(store);
     }
 
-    public void run() throws IOException, InterruptedException {
+    public void run() throws IOException {
         System.out.println("프로그램을 시작합니다...");
         System.out.println("-1 입력시 종료합니다.\n");
 
         var command = "";
-        System.out.println(Store.store.mainPage(this));
+
+        System.out.println(store.homePage(this));
         while (!(command = br.readLine()).equals("-1")) {
-            var page = Store.store.request(command, this);
+            var page = store.request(command, this);
             System.out.println(page);
 
-            if(state.isWait()){
-                Thread.sleep(3000);
-                System.out.println(Store.store.mainPage(this));
-                state.setWait(false);
-            }
-            if(state.needMain()){
-                System.out.println(Store.store.mainPage(this));
-                state.setNeedMain(false);
+            store.buffering(this);
+
+            if(state.isRedirect()){
+                System.out.println(store.homePage(this));
             }
         }
     }
 
     @Override
     public State getState() {
-        if(state == null) state = State.create();
         return state;
+    }
+
+    @Override
+    public void setMenu(Menu menu) {
+        state.menu = menu;
     }
 
     @Override

@@ -1,25 +1,26 @@
 package com.example.domain.menu;
 
+import com.example.domain.menu.template.LeafMenu;
+import com.example.domain.menu.template.Menu;
 import com.example.page.Page;
 import com.example.state.State;
 
-public class BackMenu extends Menu {
-    private final Menu preMenu;
+public class BackMenu extends LeafMenu {
+    private final Menu nextMenu;
 
-    public BackMenu(Menu perMenu) {
-        super("", "");
-        this.preMenu = perMenu;
+    public BackMenu(Menu nextMenu) {
+        super("", "", nextMenu);
+        this.nextMenu = nextMenu;
     }
-
     @Override
     public Page page(State state) {
-        return preMenu.page(state);
+        return nextMenu.page(state);
     }
 
     @Override
     public Page process(String command, State state) {
         if (command.equals("1.돌아가기")) {
-            state.setMenu(preMenu);
+            state.menu = nextMenu;
             return state.page();
         }
         throw new IllegalArgumentException("잘못된 입력");

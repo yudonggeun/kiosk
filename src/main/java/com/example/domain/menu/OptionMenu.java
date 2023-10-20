@@ -1,19 +1,20 @@
 package com.example.domain.menu;
 
-import com.example.domain.HomeMenu;
-import com.example.domain.Order;
 import com.example.domain.Option;
+import com.example.domain.Order;
+import com.example.domain.menu.template.LeafMenu;
+import com.example.domain.menu.template.Menu;
 import com.example.page.HomePage;
 import com.example.page.Page;
 import com.example.page.ProductPurchaseAcceptPage;
 import com.example.page.ProductPurchasePage;
 import com.example.state.State;
 
-public class OptionMenu extends Menu {
+public class OptionMenu extends LeafMenu {
     private final Option option;
 
-    public OptionMenu(Option option) {
-        super(option.name(), option.name());
+    public OptionMenu(Option option, Menu menu) {
+        super(option.name(), option.name(), menu);
         this.option = option;
     }
 
@@ -28,16 +29,15 @@ public class OptionMenu extends Menu {
 
     @Override
     public Page process(String command, State state) {
-        var option = ((OptionMenu) state.getMenu()).option();
-        var nextMenu = HomeMenu.single();
+        var option = ((OptionMenu) state.menu).option();
 
         if (command.equals("1.확인")) {
             state.addOrder(new Order(option, 1));
-            state.setMenu(nextMenu);
-            state.setNeedMain(true);
+            state.menu = nextMenu;
+            state.redirect();
             return new ProductPurchaseAcceptPage(option.name());
         } else if (command.equals("2.취소")) {
-            state.setMenu(nextMenu);
+            state.menu = nextMenu;
             return new HomePage(state);
         }
         throw new IllegalArgumentException("잘못된 입력");

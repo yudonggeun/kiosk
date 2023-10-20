@@ -11,7 +11,7 @@ public class ProductListPage implements Page {
 
 
     public ProductListPage(State state) {
-        this.menu = (CategoryMenu) state.getMenu();
+        this.menu = (CategoryMenu) state.menu;
     }
 
     @Override

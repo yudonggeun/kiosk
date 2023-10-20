@@ -1,6 +1,6 @@
 package com.example.domain.factory;
 
-import com.example.domain.menu.Menu;
+import com.example.domain.menu.template.Menu;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

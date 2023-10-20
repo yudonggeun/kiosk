@@ -6,14 +6,14 @@ import com.example.domain.factory.CategoryMenuFactory;
 import com.example.domain.factory.ProductMenuFactory;
 import com.example.page.HomePage;
 import com.example.service.Manager;
+import com.example.service.OrderService;
 import com.example.state.State;
 
 public class Store {
 
-    public static final Store store = new Store();
     public static final Manager manager = new Manager();
     public static final SaleHistory record = new SaleHistory();
-    public static HomeMenu main;
+    public final HomeMenu main;
 
     public String request(String command, Client client) {
         try {
@@ -25,13 +25,30 @@ public class Store {
         }
     }
 
-    public String mainPage(Client client) {
-        client.getState().setMenu(HomeMenu.single());
+    public void buffering(Client client) {
+        if (client.getState().buffering()) {
+            stop(3);
+            OrderService.quit();
+        }
+    }
+
+    public String homePage(Client client) {
+        client.getState();
+        client.setMenu(main);
         return new HomePage(client.getState()).render();
+    }
+
+    private void stop(int second) {
+        try {
+            Thread.sleep(second * 1000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Store() {
 
+        main = new HomeMenu();
         //product
         var burgerA = new Product("burgerA", "burgetA good", 10000);
         var burgerB = new Product("burgerB", "burgetB good", 11000);
@@ -40,19 +57,19 @@ public class Store {
         var pizzaB = new Product("pizzaB", "burgetB good", 11000);
 
         // product factory
-        var product1 = ProductMenuFactory.of(burgerA)
+        var product1 = ProductMenuFactory.of(burgerA, main)
                 .option("single", 0, "1", "single")
                 .option("double", 1000, "2", "double");
 
-        var product2 = ProductMenuFactory.of(burgerB)
+        var product2 = ProductMenuFactory.of(burgerB, main)
                 .option("single", 0, "1", "single")
                 .option("double", 1000, "2", "double");
 
-        var product3 = ProductMenuFactory.of(pizzaA)
+        var product3 = ProductMenuFactory.of(pizzaA, main)
                 .option("large", 10000, "1")
                 .option("medium", 0, "2");
 
-        var product4 = ProductMenuFactory.of(pizzaB)
+        var product4 = ProductMenuFactory.of(pizzaB, main)
                 .option("large", 10000, "1")
                 .option("medium", 0, "2");
 
@@ -66,14 +83,14 @@ public class Store {
                 .addProductMenu(product4, "2");
 
         // order menu
-        main = HomeMenu.single()
+        main
                 .addMenu(CategoryMenuFactory.of("category1")
                         .addCategory(subMenu1, "1", "burger", "1.burger")
                         .addCategory(subMenu2, "2", "pizza", "2.pizza")
                 )
                 .addMenu(CategoryMenuFactory.of("order")
-                        .addCategory(new CommandOrderMenu("order", "장바구니 주문"), "3", "장바구니 주문")
-                        .addCategory(new CommandCancelMenu("cancel", "취소"), "4", "취소")
+                        .addCategory(new CommandOrderMenu("order", "장바구니 주문", main), "3", "장바구니 주문")
+                        .addCategory(new CommandCancelMenu("cancel", "취소", main), "4", "취소")
                 )
         ;
     }

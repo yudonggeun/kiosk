@@ -13,7 +13,7 @@ public class CommandOrderPage implements Page {
     private final Cart cart;
 
     public CommandOrderPage(State state) {
-        this.cart = state.getCart();
+        this.cart = state.cart;
     }
 
     @Override

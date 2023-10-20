@@ -8,7 +8,7 @@ public class HomePage implements Page {
     private final HomeMenu mainMenu;
 
     public HomePage(State state) {
-        this.mainMenu = (HomeMenu) state.getMenu();
+        this.mainMenu = (HomeMenu) state.menu;
     }
 
     @Override

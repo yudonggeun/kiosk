@@ -8,7 +8,7 @@ public class ProductPurchasePage implements Page {
     private final Product product;
 
     public ProductPurchasePage(State state) {
-        this.product = ((OptionMenu) state.getMenu()).option();
+        this.product = ((OptionMenu) state.menu).option();
     }
 
     @Override

@@ -1,16 +1,18 @@
 package com.example.domain.menu;
 
-import com.example.domain.HomeMenu;
 import com.example.domain.Store;
+import com.example.domain.menu.template.LeafMenu;
+import com.example.domain.menu.template.Menu;
 import com.example.page.CommandOrderAcceptPage;
 import com.example.page.CommandOrderPage;
 import com.example.page.HomePage;
 import com.example.page.Page;
 import com.example.state.State;
 
-public class CommandOrderMenu extends Menu {
-    public CommandOrderMenu(String name, String description) {
-        super(description, name);
+public class CommandOrderMenu extends LeafMenu {
+
+    public CommandOrderMenu(String name, String description, Menu nextMenu) {
+        super(description, name, nextMenu);
     }
 
     @Override
@@ -21,14 +23,14 @@ public class CommandOrderMenu extends Menu {
     @Override
     public Page process(String command, State state) {
         if (command.equals("1.주문")) {
-            var cart = state.getCart();
+            var cart = state.cart;
             cart.getOrders().forEach(Store.record::sale);
             cart.clear();
-            state.setWait(true);
-            state.setMenu(HomeMenu.single());
+            state.block();
+            state.menu = nextMenu;
             return new CommandOrderAcceptPage();
         } else if (command.equals("2.메뉴판")) {
-            state.setMenu(HomeMenu.single());
+            state.menu = nextMenu;
             return new HomePage(state);
         }
         throw new IllegalArgumentException("잘못된 입력");

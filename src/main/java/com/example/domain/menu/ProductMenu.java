@@ -2,6 +2,7 @@ package com.example.domain.menu;
 
 import com.example.domain.Option;
 import com.example.domain.Product;
+import com.example.domain.menu.template.BranchMenu;
 import com.example.page.Page;
 import com.example.page.ProductOptionPage;
 import com.example.state.State;
@@ -9,7 +10,7 @@ import com.example.state.State;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class ProductMenu extends Menu {
+public class ProductMenu extends BranchMenu {
 
     private final Product product;
     private final Set<Option> options = new LinkedHashSet<>();

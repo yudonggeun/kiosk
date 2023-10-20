@@ -1,13 +1,15 @@
 package com.example.domain.menu;
 
 import com.example.domain.factory.ProductMenuFactory;
+import com.example.domain.menu.template.BranchMenu;
+import com.example.domain.menu.template.Menu;
 import com.example.page.Page;
 import com.example.page.ProductListPage;
 import com.example.state.State;
 
 import java.util.LinkedHashSet;
 
-public class CategoryMenu extends Menu {
+public class CategoryMenu extends BranchMenu {
     public CategoryMenu(String name, String description) {
         super(name, description);
     }

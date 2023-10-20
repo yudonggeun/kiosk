@@ -13,7 +13,7 @@ public class ProductOptionPage implements Page {
     private final Set<Option> options;
 
     public ProductOptionPage(State state) {
-        var menu = (ProductMenu) state.getMenu();
+        var menu = (ProductMenu) state.menu;
         this.product = menu.getProduct();
         this.options = menu.getOptions();
     }

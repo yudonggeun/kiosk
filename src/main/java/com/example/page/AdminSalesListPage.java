@@ -10,7 +10,6 @@ public class AdminSalesListPage implements Page {
     public AdminSalesListPage() {
         this.saleHistory = Store.record;
     }
-
     @Override
     public String render() {
         var sb = new StringBuilder()

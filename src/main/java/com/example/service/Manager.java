@@ -14,16 +14,16 @@ public class Manager {
         } else if (command.equals("=")) {
             return getTotalSaleList(state);
         }
-        return state.getMenu().process(command, state);
+        return state.menu.process(command, state);
     }
 
     public Page getTotalSalePrice(State state) {
-        state.setMenu(new BackMenu(state.getMenu()));
+        state.menu = new BackMenu(state.menu);
         return new AdminTotalSalesPage();
     }
 
     public Page getTotalSaleList(State state) {
-        state.setMenu(new BackMenu(state.getMenu()));
+        state.menu = new BackMenu(state.menu);
         return new AdminSalesListPage();
     }
 }
