@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SaleHistory {
-
     private final Map<Product, Integer> history = new HashMap<>();
 
     public void sale(Product product, int count) {

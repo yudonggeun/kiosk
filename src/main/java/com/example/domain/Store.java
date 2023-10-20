@@ -1,10 +1,14 @@
 package com.example.domain;
 
 import com.example.Client.Client;
-import com.example.domain.menu.*;
-import com.example.domain.factory.CategoryMenuFactory;
-import com.example.domain.factory.ProductMenuFactory;
+import com.example.menu.CategoryMenu;
+import com.example.menu.CommandCancelMenu;
+import com.example.menu.CommandOrderMenu;
+import com.example.menu.HomeMenu;
+import com.example.menu.factory.CategoryMenuFactory;
+import com.example.menu.factory.ProductMenuFactory;
 import com.example.page.HomePage;
+import com.example.page.Page;
 import com.example.service.Manager;
 import com.example.service.OrderService;
 import com.example.state.State;
@@ -36,6 +40,11 @@ public class Store {
         client.getState();
         client.setMenu(main);
         return new HomePage(client.getState()).render();
+    }
+
+    public String reload(Client client){
+        Page page = client.getState().menu.page(client.getState());
+        return page.render();
     }
 
     private void stop(int second) {

@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.domain.menu.BackMenu;
+import com.example.menu.BackMenu;
 import com.example.page.AdminSalesListPage;
 import com.example.page.AdminTotalSalesPage;
 import com.example.page.Page;

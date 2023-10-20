@@ -1,5 +1,6 @@
-package com.example.domain.menu.template;
+package com.example.menu.template;
 
+import com.example.page.ErrorPage;
 import com.example.page.Page;
 import com.example.state.State;
 
@@ -19,7 +20,10 @@ public abstract class BranchMenu extends DefaultMenu implements Menu {
 
     @Override
     public Page process(String command, State state) {
-        if (!commandMap.containsKey(command)) throw new IllegalArgumentException();
+        if (!commandMap.containsKey(command)) {
+            state.redirect();
+            return new ErrorPage();
+        }
         state.menu = commandMap.get(command);
         return state.page();
     }

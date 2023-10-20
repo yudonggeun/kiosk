@@ -1,8 +1,8 @@
-package com.example.domain;
+package com.example.menu;
 
-import com.example.domain.factory.CategoryMenuFactory;
-import com.example.domain.menu.template.BranchMenu;
-import com.example.domain.menu.template.Menu;
+import com.example.menu.factory.CategoryMenuFactory;
+import com.example.menu.template.BranchMenu;
+import com.example.menu.template.Menu;
 import com.example.page.HomePage;
 import com.example.page.Page;
 import com.example.state.State;

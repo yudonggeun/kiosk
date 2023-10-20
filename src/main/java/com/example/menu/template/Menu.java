@@ -1,4 +1,4 @@
-package com.example.domain.menu.template;
+package com.example.menu.template;
 
 import com.example.page.Page;
 import com.example.state.State;

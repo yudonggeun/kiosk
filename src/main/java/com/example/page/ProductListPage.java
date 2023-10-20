@@ -1,8 +1,8 @@
 package com.example.page;
 
 import com.example.config.Property;
-import com.example.domain.menu.CategoryMenu;
-import com.example.domain.menu.ProductMenu;
+import com.example.menu.CategoryMenu;
+import com.example.menu.ProductMenu;
 import com.example.state.State;
 
 public class ProductListPage implements Page {

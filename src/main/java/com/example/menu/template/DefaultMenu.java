@@ -1,4 +1,4 @@
-package com.example.domain.menu.template;
+package com.example.menu.template;
 
 public abstract class DefaultMenu implements Menu{
 

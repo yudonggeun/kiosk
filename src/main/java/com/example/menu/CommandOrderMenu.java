@@ -1,8 +1,8 @@
-package com.example.domain.menu;
+package com.example.menu;
 
 import com.example.domain.Store;
-import com.example.domain.menu.template.LeafMenu;
-import com.example.domain.menu.template.Menu;
+import com.example.menu.template.LeafMenu;
+import com.example.menu.template.Menu;
 import com.example.page.CommandOrderAcceptPage;
 import com.example.page.CommandOrderPage;
 import com.example.page.HomePage;

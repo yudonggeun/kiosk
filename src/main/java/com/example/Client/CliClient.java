@@ -1,7 +1,7 @@
 package com.example.Client;
 
 import com.example.domain.Store;
-import com.example.domain.menu.template.Menu;
+import com.example.menu.template.Menu;
 import com.example.state.State;
 
 import java.io.BufferedReader;
@@ -35,7 +35,7 @@ public class CliClient implements Closeable, Client{
             store.buffering(this);
 
             if(state.isRedirect()){
-                System.out.println(store.homePage(this));
+                System.out.println(store.reload(this));
             }
         }
     }
