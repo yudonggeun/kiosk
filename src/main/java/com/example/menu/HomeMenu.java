@@ -17,7 +17,7 @@ public class HomeMenu extends BranchMenu {
         super("", "");
     }
 
-    public HomeMenu addMenu(String category, String command, Menu menu) {
+    public HomeMenu add(String category, String command, Menu menu) {
         pageMap.putIfAbsent(category, new LinkedHashSet<>());
         pageMap.get(category).add(menu);
 
@@ -25,12 +25,12 @@ public class HomeMenu extends BranchMenu {
         return this;
     }
 
-    public HomeMenu addMenu(CategoryMenuFactory factory) {
+    public HomeMenu add(CategoryMenuFactory factory) {
         var category = factory.getCategoryName();
         for (var entry : factory.getCategories().entrySet()) {
             var menu = entry.getKey();
             for (String command : entry.getValue()) {
-                addMenu(category, command, menu);
+                add(category, command, menu);
             }
         }
         return this;

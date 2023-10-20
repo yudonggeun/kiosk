@@ -23,7 +23,7 @@ public class HomePage implements Page {
         var subMenus = mainMenu.pageMap();
         for (var entry : subMenus.entrySet()) {
             var subject = entry.getKey();
-            sb.append(String.format("[ %s MENU ]\n", subject));
+            sb.append(String.format("[ %s ]\n", subject));
             for (var menu : entry.getValue()) {
                 sb.append(String.format("%d. %-10s | %s\n", ++order, menu.name(), menu.description()));
             }

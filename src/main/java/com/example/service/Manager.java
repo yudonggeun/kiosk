@@ -11,7 +11,7 @@ public class Manager {
     public Page handle(String command, State state) {
         if (command.equals("0")) {
             return getTotalSalePrice(state);
-        } else if (command.equals("=")) {
+        } else if (command.equals(".")) {
             return getTotalSaleList(state);
         }
         return state.menu.process(command, state);

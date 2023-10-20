@@ -28,7 +28,7 @@ public class CategoryMenuFactory {
         return categories;
     }
 
-    public CategoryMenuFactory addCategory(Menu menu, String... commands){
+    public CategoryMenuFactory category(Menu menu, String... commands){
         for (String command : commands) {
             categories.putIfAbsent(menu, new ArrayList<>());
             categories.get(menu).add(command);

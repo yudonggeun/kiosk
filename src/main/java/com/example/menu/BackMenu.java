@@ -19,7 +19,7 @@ public class BackMenu extends LeafMenu {
 
     @Override
     public Page process(String command, State state) {
-        if (command.equals("1.돌아가기")) {
+        if (command.equals("1.돌아가기") || command.equals("1")) {
             state.menu = nextMenu;
             return state.page();
         }

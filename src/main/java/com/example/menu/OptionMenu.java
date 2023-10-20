@@ -31,12 +31,12 @@ public class OptionMenu extends LeafMenu {
     public Page process(String command, State state) {
         var option = ((OptionMenu) state.menu).option();
 
-        if (command.equals("1.확인")) {
+        if (command.equals("1.확인") || command.equals("1")) {
             state.addOrder(new Order(option, 1));
             state.menu = nextMenu;
             state.redirect();
             return new ProductPurchaseAcceptPage(option.name());
-        } else if (command.equals("2.취소")) {
+        } else if (command.equals("2.취소") || command.equals("2")) {
             state.menu = nextMenu;
             return new HomePage(state);
         }

@@ -1,6 +1,6 @@
 package com.example.page;
 
-import com.example.domain.Store;
+import com.example.store.Store;
 
 import static java.lang.String.*;
 

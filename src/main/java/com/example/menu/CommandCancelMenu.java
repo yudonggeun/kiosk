@@ -11,7 +11,7 @@ import com.example.state.State;
 public class CommandCancelMenu extends LeafMenu {
 
     public CommandCancelMenu(String name, String description, Menu nextMenu) {
-        super(description, name, nextMenu);
+        super(name, description, nextMenu);
     }
 
     @Override
@@ -21,12 +21,12 @@ public class CommandCancelMenu extends LeafMenu {
 
     @Override
     public Page process(String command, State state) {
-        if (command.equals("1.확인")) {
+        if (command.equals("1.확인") || command.equals("1")) {
             state.cart.clear();
             state.menu = nextMenu;
             state.redirect();
             return new CommandCancelAcceptPage();
-        } else if (command.equals("2.취소")) {
+        } else if (command.equals("2.취소") || command.equals("2")) {
             state.menu = nextMenu;
             return new HomePage(state);
         }

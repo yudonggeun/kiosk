@@ -2,7 +2,7 @@ package com.example.state;
 
 import com.example.domain.Cart;
 import com.example.domain.Order;
-import com.example.domain.Store;
+import com.example.store.Store;
 import com.example.menu.template.Menu;
 import com.example.page.Page;
 

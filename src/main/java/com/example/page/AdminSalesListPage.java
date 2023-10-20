@@ -1,7 +1,7 @@
 package com.example.page;
 
 import com.example.domain.SaleHistory;
-import com.example.domain.Store;
+import com.example.store.Store;
 
 public class AdminSalesListPage implements Page {
 

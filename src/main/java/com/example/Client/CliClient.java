@@ -1,6 +1,7 @@
 package com.example.Client;
 
-import com.example.domain.Store;
+import com.example.store.BurgerKing;
+import com.example.store.Store;
 import com.example.menu.template.Menu;
 import com.example.state.State;
 
@@ -17,7 +18,7 @@ public class CliClient implements Closeable, Client{
 
     public CliClient() {
         br = new BufferedReader(new InputStreamReader(System.in));
-        store = new Store();
+        store = new BurgerKing();
         state = State.create(store);
     }
 
