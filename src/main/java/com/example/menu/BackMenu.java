@@ -13,12 +13,12 @@ public class BackMenu extends LeafMenu {
         this.nextMenu = nextMenu;
     }
     @Override
-    public Page page(State state) {
+    public String page(State state) {
         return nextMenu.page(state);
     }
 
     @Override
-    public Page process(String command, State state) {
+    public String process(String command, State state) {
         if (command.equals("1.돌아가기") || command.equals("1")) {
             state.menu = nextMenu;
             return state.page();

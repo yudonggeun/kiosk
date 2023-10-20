@@ -8,13 +8,17 @@ import com.example.state.State;
 
 public class Manager {
 
-    public Page handle(String command, State state) {
+    public String handle(String command, State state) {
         if (command.equals("0")) {
-            return getTotalSalePrice(state);
+            return getTotalSalePrice(state).render();
         } else if (command.equals(".")) {
-            return getTotalSaleList(state);
+            return getTotalSaleList(state).render();
         }
-        return state.menu.process(command, state);
+        return state.process(command);
+    }
+
+    public boolean buffering(State state){
+        return state.buffering();
     }
 
     public Page getTotalSalePrice(State state) {

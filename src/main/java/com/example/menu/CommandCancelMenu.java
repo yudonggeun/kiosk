@@ -15,20 +15,20 @@ public class CommandCancelMenu extends LeafMenu {
     }
 
     @Override
-    public Page page(State state) {
-        return new CommandCancelPage();
+    public String page(State state) {
+        return new CommandCancelPage().render();
     }
 
     @Override
-    public Page process(String command, State state) {
+    public String process(String command, State state) {
         if (command.equals("1.확인") || command.equals("1")) {
             state.cart.clear();
             state.menu = nextMenu;
             state.redirect();
-            return new CommandCancelAcceptPage();
+            return new CommandCancelAcceptPage().render();
         } else if (command.equals("2.취소") || command.equals("2")) {
             state.menu = nextMenu;
-            return new HomePage(state);
+            return new HomePage(state).render();
         }
         throw new IllegalArgumentException("잘못된 입력");
     }

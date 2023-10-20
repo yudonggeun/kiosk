@@ -3,7 +3,6 @@ package com.example.menu;
 import com.example.domain.Option;
 import com.example.domain.Product;
 import com.example.menu.template.BranchMenu;
-import com.example.page.Page;
 import com.example.page.ProductOptionPage;
 import com.example.state.State;
 
@@ -44,7 +43,7 @@ public class ProductMenu extends BranchMenu {
     }
 
     @Override
-    public Page page(State state) {
-        return new ProductOptionPage(state);
+    public String page(State state) {
+        return new ProductOptionPage(state).render();
     }
 }

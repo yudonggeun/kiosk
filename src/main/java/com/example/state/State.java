@@ -2,15 +2,14 @@ package com.example.state;
 
 import com.example.domain.Cart;
 import com.example.domain.Order;
-import com.example.store.Store;
 import com.example.menu.template.Menu;
 import com.example.page.Page;
 
 public class State {
 
-    public static State create(Store store) {
+    public static State create(Menu mainMenu) {
         State state = new State();
-        state.menu = store.main;
+        state.menu = mainMenu;
         return state;
     }
 
@@ -23,31 +22,36 @@ public class State {
         cart.addOrder(order);
     }
 
-    public void block(){
+    public void block() {
         isWait = true;
         needMain = true;
     }
 
     public boolean buffering() {
-        if(isWait){
+        if (isWait) {
             isWait = false;
             return true;
         }
         return false;
     }
 
-    public void redirect(){
+    public void redirect() {
         needMain = true;
     }
+
     public boolean isRedirect() {
-        if(needMain) {
+        if (needMain) {
             needMain = false;
             return true;
         }
         return false;
     }
 
-    public Page page() {
+    public String process(String command) {
+        return menu.process(command, this);
+    }
+
+    public String page() {
         return menu.page(this);
     }
 }

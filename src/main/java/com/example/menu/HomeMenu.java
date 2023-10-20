@@ -41,7 +41,7 @@ public class HomeMenu extends BranchMenu {
     }
 
     @Override
-    public Page page(State state) {
-        return new HomePage(state);
+    public String page(State state) {
+        return new HomePage(state).render();
     }
 }

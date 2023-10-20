@@ -20,32 +20,28 @@ public abstract class Store {
         init();
     }
 
-    public String request(String command, Client client) {
+    public String request(String command, State state) {
         try {
-            State state = client.getState();
-            return manager.handle(command, state)
-                    .render();
+            return manager.handle(command, state);
         } catch (RuntimeException e) {
             return command + " : 잘못된 입력입니다.";
         }
     }
 
-    public void buffering(Client client) {
-        if (client.getState().buffering()) {
+    public void buffering(State state) {
+        if (manager.buffering(state)) {
             stop(3);
             OrderService.quit();
         }
     }
 
-    public String homePage(Client client) {
-        client.getState();
-        client.setMenu(main);
-        return new HomePage(client.getState()).render();
+    public String homePage(State state) {
+        state.menu = main;
+        return new HomePage(state).render();
     }
 
-    public String reload(Client client){
-        Page page = client.getState().menu.page(client.getState());
-        return page.render();
+    public String reload(State state) {
+        return state.page();
     }
 
     private void stop(int second) {

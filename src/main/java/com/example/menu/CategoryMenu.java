@@ -19,8 +19,8 @@ public class CategoryMenu extends BranchMenu {
     }
 
     @Override
-    public Page page(State state) {
-        return new ProductListPage(state);
+    public String page(State state) {
+        return new ProductListPage(state).render();
     }
 
     public CategoryMenu addProductMenu(ProductMenuFactory factory, String... commands){

@@ -16,22 +16,22 @@ public class CommandOrderMenu extends LeafMenu {
     }
 
     @Override
-    public Page page(State state) {
-        return new CommandOrderPage(state);
+    public String page(State state) {
+        return new CommandOrderPage(state).render();
     }
 
     @Override
-    public Page process(String command, State state) {
+    public String process(String command, State state) {
         if (command.equals("1.주문") || command.equals("1")) {
             var cart = state.cart;
             cart.getOrders().forEach(Store.record::sale);
             cart.clear();
             state.block();
             state.menu = nextMenu;
-            return new CommandOrderAcceptPage();
+            return new CommandOrderAcceptPage().render();
         } else if (command.equals("2.메뉴판") || command.equals("2")) {
             state.menu = nextMenu;
-            return new HomePage(state);
+            return new HomePage(state).render();
         }
         throw new IllegalArgumentException("잘못된 입력");
     }

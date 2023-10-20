@@ -19,10 +19,10 @@ public abstract class BranchMenu extends DefaultMenu implements Menu {
     }
 
     @Override
-    public Page process(String command, State state) {
+    public String process(String command, State state) {
         if (!commandMap.containsKey(command)) {
             state.redirect();
-            return new ErrorPage();
+            return new ErrorPage().render();
         }
         state.menu = commandMap.get(command);
         return state.page();

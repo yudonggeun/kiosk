@@ -1,9 +1,8 @@
 package com.example.Client;
 
+import com.example.state.State;
 import com.example.store.BurgerKing;
 import com.example.store.Store;
-import com.example.menu.template.Menu;
-import com.example.state.State;
 
 import java.io.BufferedReader;
 import java.io.Closeable;
@@ -19,7 +18,7 @@ public class CliClient implements Closeable, Client{
     public CliClient() {
         br = new BufferedReader(new InputStreamReader(System.in));
         store = new BurgerKing();
-        state = State.create(store);
+        state = State.create(store.main);
     }
 
     public void run() throws IOException {
@@ -28,15 +27,15 @@ public class CliClient implements Closeable, Client{
 
         var command = "";
 
-        System.out.println(store.homePage(this));
+        System.out.println(store.homePage(state));
         while (!(command = br.readLine()).equals("-1")) {
-            var page = store.request(command, this);
+            var page = store.request(command,state);
             System.out.println(page);
 
-            store.buffering(this);
+            store.buffering(state);
 
             if(state.isRedirect()){
-                System.out.println(store.reload(this));
+                System.out.println(store.reload(state));
             }
         }
     }
@@ -44,11 +43,6 @@ public class CliClient implements Closeable, Client{
     @Override
     public State getState() {
         return state;
-    }
-
-    @Override
-    public void setMenu(Menu menu) {
-        state.menu = menu;
     }
 
     @Override
