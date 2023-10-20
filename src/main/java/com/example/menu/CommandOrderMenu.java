@@ -6,7 +6,6 @@ import com.example.menu.template.Menu;
 import com.example.page.CommandOrderAcceptPage;
 import com.example.page.CommandOrderPage;
 import com.example.page.HomePage;
-import com.example.page.Page;
 import com.example.state.State;
 
 public class CommandOrderMenu extends LeafMenu {

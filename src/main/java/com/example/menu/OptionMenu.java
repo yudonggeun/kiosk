@@ -5,7 +5,6 @@ import com.example.domain.Order;
 import com.example.menu.template.LeafMenu;
 import com.example.menu.template.Menu;
 import com.example.page.HomePage;
-import com.example.page.Page;
 import com.example.page.ProductPurchaseAcceptPage;
 import com.example.page.ProductPurchasePage;
 import com.example.state.State;

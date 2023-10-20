@@ -41,11 +41,6 @@ public class CliClient implements Closeable, Client{
     }
 
     @Override
-    public State getState() {
-        return state;
-    }
-
-    @Override
     public void close() throws IOException {
         br.close();
     }

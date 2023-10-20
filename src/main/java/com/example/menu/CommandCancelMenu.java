@@ -5,7 +5,6 @@ import com.example.menu.template.Menu;
 import com.example.page.CommandCancelAcceptPage;
 import com.example.page.CommandCancelPage;
 import com.example.page.HomePage;
-import com.example.page.Page;
 import com.example.state.State;
 
 public class CommandCancelMenu extends LeafMenu {

@@ -1,7 +1,6 @@
 package com.example.menu.template;
 
 import com.example.page.ErrorPage;
-import com.example.page.Page;
 import com.example.state.State;
 
 import java.util.LinkedHashMap;

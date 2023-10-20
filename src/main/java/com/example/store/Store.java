@@ -1,10 +1,8 @@
 package com.example.store;
 
-import com.example.Client.Client;
 import com.example.domain.SaleHistory;
 import com.example.menu.HomeMenu;
 import com.example.page.HomePage;
-import com.example.page.Page;
 import com.example.service.Manager;
 import com.example.service.OrderService;
 import com.example.state.State;

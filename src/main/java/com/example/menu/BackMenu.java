@@ -2,7 +2,6 @@ package com.example.menu;
 
 import com.example.menu.template.LeafMenu;
 import com.example.menu.template.Menu;
-import com.example.page.Page;
 import com.example.state.State;
 
 public class BackMenu extends LeafMenu {
