@@ -15,7 +15,7 @@ public class State {
     public Menu menu;
     public final Cart cart = new Cart();
     private boolean isWait = false;
-    private boolean needMain = false;
+    private boolean isRedirect = false;
 
     public void addOrder(Order order) {
         cart.addOrder(order);
@@ -23,7 +23,7 @@ public class State {
 
     public void block() {
         isWait = true;
-        needMain = true;
+        isRedirect = true;
     }
 
     public boolean buffering() {
@@ -35,12 +35,12 @@ public class State {
     }
 
     public void redirect() {
-        needMain = true;
+        isRedirect = true;
     }
 
     public boolean isRedirect() {
-        if (needMain) {
-            needMain = false;
+        if (isRedirect) {
+            isRedirect = false;
             return true;
         }
         return false;

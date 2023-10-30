@@ -27,7 +27,7 @@ public abstract class Store {
     }
 
     public void buffering(State state) {
-        if (manager.buffering(state)) {
+        if (state.buffering()) {
             stop(3);
             OrderService.quit();
         }

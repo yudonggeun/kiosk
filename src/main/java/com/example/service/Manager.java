@@ -17,10 +17,6 @@ public class Manager {
         return state.process(command);
     }
 
-    public boolean buffering(State state){
-        return state.buffering();
-    }
-
     public Page getTotalSalePrice(State state) {
         state.menu = new BackMenu(state.menu);
         return new AdminTotalSalesPage();

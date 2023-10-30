@@ -10,7 +10,6 @@ public class HomePage implements Page {
     public HomePage(State state) {
         this.mainMenu = (HomeMenu) state.menu;
     }
-
     @Override
     public String render() {
         var sb = new StringBuilder()
@@ -29,7 +28,6 @@ public class HomePage implements Page {
             }
             sb.append("\n");
         }
-
         return sb.toString();
     }
 }
